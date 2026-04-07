@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Sparkles, Clock, MonitorPlay, Award, ShieldCheck, Star, Brain, Wind, Leaf, Flame, Waves, Eye, Heart, Calendar, Users, BookOpen, GraduationCap } from 'lucide-react';
 
@@ -21,14 +22,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#d4af37] selection:text-black overflow-hidden">
       {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl px-6 py-3">
-          <div className="font-display font-bold text-xl tracking-wider uppercase flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#d4af37]" />
-            Espaço Caminho da Luz
+      <header className="fixed top-0 left-0 right-0 z-50 px-3 md:px-6 py-3 md:py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl px-3 md:px-6 py-2.5 md:py-3 gap-2">
+          <div className="font-display font-bold text-[10px] sm:text-xs md:text-xl tracking-wider uppercase flex items-center gap-1.5 md:gap-2">
+            <Sparkles className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#d4af37] shrink-0" />
+            <span className="truncate">Espaço Caminho da Luz</span>
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
-            <a href="#curso" className="hover:text-white transition-colors">O Curso</a>
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-white/70">
             <a href="#diferenciais" className="hover:text-white transition-colors">Diferenciais</a>
             <a href="#vantagens" className="hover:text-white transition-colors">Benefícios</a>
             <a href="#modulos" className="hover:text-white transition-colors">Módulos</a>
@@ -37,7 +37,7 @@ export default function App() {
             href="https://pay.hotmart.com/N69139177Q?sck=HOTMART_PRODUCT_PAGE&off=ztjix57g&hotfeature=32&bid=1774026844259"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#d4af37] transition-colors text-center"
+            className="bg-white text-black px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold hover:bg-[#d4af37] transition-colors text-center whitespace-nowrap shrink-0"
           >
             Garantir Vaga
           </a>
@@ -142,11 +142,11 @@ export default function App() {
             <p className="text-white/50 text-lg max-w-2xl mx-auto">Tudo o que você precisa para mergulhar profundamente nas práticas meditativas mais poderosas do mundo.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Card 1: Large */}
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="md:col-span-2 bg-[#0a0a0a] rounded-[2rem] p-8 md:p-12 border border-white/5 relative overflow-hidden group"
+              className="md:col-span-2 lg:col-span-2 bg-[#0a0a0a] rounded-[2rem] p-8 md:p-12 border border-white/5 relative overflow-hidden group"
             >
               <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
                 <img src="https://images.unsplash.com/photo-1602192509154-0b900ee1f851?q=80&w=1000&auto=format&fit=crop" alt="Cristais" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
@@ -200,7 +200,7 @@ export default function App() {
             {/* Card 4: Wide */}
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="md:col-span-2 bg-[#0a0a0a] rounded-[2rem] p-8 md:p-12 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors"
+              className="md:col-span-2 lg:col-span-2 bg-[#0a0a0a] rounded-[2rem] p-8 md:p-12 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors"
             >
               <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
                 <div className="w-full h-full bg-gradient-to-br from-[#d4af37] via-[#d4af37]/20 to-transparent"></div>
@@ -338,7 +338,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="relative h-[600px] lg:h-[700px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a] order-2 lg:order-1"
+            className="relative h-[400px] md:h-[500px] lg:h-[700px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a] order-2 lg:order-1"
           >
             <img 
               src="https://lh3.googleusercontent.com/u/0/d/11fMJHanhvgSCacRzW7GLRbkuoCY0t_e0" 
@@ -388,11 +388,16 @@ export default function App() {
                 <div className="font-display font-bold text-xl text-white mb-1">9 livros</div>
                 <div className="text-xs text-white/50">publicados</div>
               </div>
-              <div className="bg-[#0a0a0a] border border-white/5 rounded-2xl p-5 text-center hover:border-[#d4af37]/30 transition-colors group">
-                <GraduationCap className="w-6 h-6 text-white/40 group-hover:text-[#d4af37] transition-colors mx-auto mb-3" />
+              <motion.a 
+                href="#cursos"
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="block bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-2xl p-5 text-center hover:border-[#d4af37]/60 hover:bg-[#d4af37]/20 transition-all group cursor-pointer shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_25px_rgba(212,175,55,0.25)]"
+              >
+                <GraduationCap className="w-6 h-6 text-[#d4af37] mx-auto mb-3" />
                 <div className="font-display font-bold text-xl text-white mb-1">12 Cursos</div>
-                <div className="text-xs text-white/50">de Alimentação à Física Quântica</div>
-              </div>
+                <div className="text-xs text-white/70">de Alimentação à Física Quântica</div>
+              </motion.a>
             </div>
           </motion.div>
         </div>
@@ -400,7 +405,7 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/5 py-12 px-6 bg-[#050505]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
           <div className="font-display font-bold text-xl tracking-wider uppercase flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[#d4af37]" />
             Espaço Caminho da Luz
@@ -408,9 +413,11 @@ export default function App() {
           <p className="text-white/40 text-sm">
             &copy; 2026 Cursos Esotéricos. Todos os direitos reservados.
           </p>
-          <div className="flex gap-4 text-sm text-white/40">
-            <a href="#" className="hover:text-white transition-colors">Termos</a>
-            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/40">
+            <span>Criado por Afiliado Oficial</span>
+            <span className="hidden sm:inline">•</span>
+            <Link to="/termos" className="hover:text-white transition-colors">Termos</Link>
+            <Link to="/privacidade" className="hover:text-white transition-colors">Privacidade</Link>
           </div>
         </div>
       </footer>
