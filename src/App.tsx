@@ -317,13 +317,13 @@ export default function App() {
             </div>
           </motion.div>
           
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             className="relative h-[600px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a]"
           >
-            <img 
-              src="https://lh3.googleusercontent.com/u/0/d/1lVmfAoXcz8XwiJpfeNIT-5r28md6VzDs" 
-              alt="mulher meditando" 
+            <img
+              src="https://lh3.googleusercontent.com/d/15ldHHAysswb3yGz4Wu9uYA5aJdIe1-5Y"
+              alt="mulher meditando"
               width="500"
               className="w-full h-full object-cover"
             />
