@@ -336,13 +336,13 @@ export default function App() {
       {/* SOBRE O PROFESSOR */}
       <section id="professor" className="py-32 px-6 bg-[#050505]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             className="relative h-[400px] md:h-[500px] lg:h-[700px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a] order-2 lg:order-1"
           >
-            <img 
-              src="https://lh3.googleusercontent.com/u/0/d/11fMJHanhvgSCacRzW7GLRbkuoCY0t_e0" 
-              alt="Professor Laércio Fonseca" 
+            <img
+              src="https://lh3.googleusercontent.com/d/1QgtHCY7IQ17qi2syT1xZy2-SDhQqkETn"
+              alt="Professor Laércio Fonseca"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent"></div>
