@@ -33,8 +33,8 @@ export default function App() {
             <a href="#vantagens" className="hover:text-white transition-colors">Benefícios</a>
             <a href="#modulos" className="hover:text-white transition-colors">Módulos</a>
           </nav>
-          <a 
-            href="https://pay.hotmart.com/N69139177Q?sck=HOTMART_PRODUCT_PAGE&off=ztjix57g&hotfeature=32&bid=1774026844259"
+          <a
+            href="https://pay.hotmart.com/N69139177Q?off=ztjix57g&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=meditacao"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-black px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold hover:bg-[#d4af37] transition-colors text-center whitespace-nowrap shrink-0"
@@ -82,8 +82,8 @@ export default function App() {
             </motion.p>
             
             <motion.div variants={fadeIn} className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a 
-                href="https://pay.hotmart.com/N69139177Q?sck=HOTMART_PRODUCT_PAGE&off=ztjix57g&hotfeature=32&bid=1774026844259"
+              <a
+                href="https://pay.hotmart.com/N69139177Q?off=ztjix57g&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=meditacao"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-[#d4af37] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] text-center"
