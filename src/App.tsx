@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Sparkles, Clock, MonitorPlay, Award, ShieldCheck, Star, Brain, Wind, Leaf, Flame, Waves, Eye, Heart, Calendar, Users, BookOpen, GraduationCap, Play } from 'lucide-react';
+import { Sparkles, Clock, MonitorPlay, Award, ShieldCheck, Brain, Wind, Leaf, Flame, Waves, Eye, Heart, Calendar, Users, BookOpen, GraduationCap, Play } from 'lucide-react';
 import { useState } from 'react';
 import VideoModal from './components/VideoModal';
+import Footer from './components/Footer';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -94,7 +94,6 @@ export default function App() {
                 Iniciar Minha Jornada
               </a>
               
-              {/* Video Thumbnail Trigger */}
               <button
                 onClick={() => setIsVideoModalOpen(true)}
                 className="group relative w-full sm:w-[200px] aspect-video rounded-xl overflow-hidden border border-white/20 hover:border-[#d4af37]/50 transition-all duration-300 hover:scale-105 shadow-lg"
@@ -163,7 +162,6 @@ export default function App() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Card 1: Large */}
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="md:col-span-2 lg:col-span-2 bg-[#0a0a0a] rounded-[2rem] p-8 md:p-12 border border-white/5 relative overflow-hidden group"
@@ -181,7 +179,6 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Card 2: Square */}
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="bg-[#0a0a0a] rounded-[2rem] p-8 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors"
@@ -199,7 +196,6 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Card 3: Square */}
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="bg-[#0a0a0a] rounded-[2rem] p-8 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors"
@@ -217,7 +213,6 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Card 4: Wide */}
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
               className="md:col-span-2 lg:col-span-2 bg-[#0a0a0a] rounded-[2rem] p-8 md:p-12 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors"
@@ -424,23 +419,7 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/5 py-12 px-6 bg-[#050505]">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
-          <div className="font-display font-bold text-xl tracking-wider uppercase flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#d4af37]" />
-            Espaço Caminho da Luz
-          </div>
-          <p className="text-white/40 text-sm">
-            &copy; 2026 Cursos Esotéricos. Todos os direitos reservados.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/40">
-            <span>Criado por Afiliado Oficial</span>
-            <span className="hidden sm:inline">•</span>
-            <Link to="/termos" className="hover:text-white transition-colors">Termos</Link>
-            <Link to="/privacidade" className="hover:text-white transition-colors">Privacidade</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Video Modal */}
       <VideoModal 
