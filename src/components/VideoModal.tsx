@@ -10,21 +10,22 @@ interface VideoModalProps {
 }
 
 export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps) {
-  // modestsbranding=1 e rel=0 ajudam a reduzir a marca, mas a logo no canto ainda pode aparecer
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&controls=1&fs=0&disablekb=1`;
+  // controls=0 remove a barra de progresso e botões do player
+  // modestbranding=1 tenta esconder a logo (embora com controls=0 ela mude de comportamento)
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=0&showinfo=0&disablekb=1&iv_load_policy=3`;
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center">
-          {/* Backdrop - Click outside to close */}
+          {/* Backdrop - Clicar fora fecha o modal */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/90 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 bg-black/95 backdrop-blur-md cursor-pointer"
           />
           
           {/* Modal Content */}
@@ -36,26 +37,30 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
             className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] mx-4"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Botão de Fechar no canto superior */}
             <button
               onClick={onClose}
-              className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors flex items-center gap-2 group z-10"
+              className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors z-30 bg-black/50 p-2 rounded-full backdrop-blur-sm"
             >
-              <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Fechar</span>
               <X className="w-6 h-6" />
             </button>
 
-            {/* Iframe */}
+            {/* Iframe do Vídeo */}
             <iframe
-              className="w-full h-full"
+              className="w-full h-full pointer-events-none"
               src={embedUrl}
               title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen={false}
             />
 
-            {/* Overlay invisível para bloquear o clique na logo do YouTube (canto inferior direito) */}
-            <div className="absolute bottom-0 right-0 w-[100px] h-[50px] z-10 cursor-default" />
+            {/* 
+              Camada de bloqueio total: 
+              Como os controles estão desativados e o vídeo é autoplay, 
+              colocamos um div por cima para impedir QUALQUER clique no iframe.
+              Isso impede pular o vídeo ou clicar em logos/links.
+            */}
+            <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
           </motion.div>
         </div>
       )}
