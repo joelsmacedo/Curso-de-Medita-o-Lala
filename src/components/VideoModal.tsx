@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Maximize, Minimize } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import VideoCTAButton from './VideoCTAButton';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -10,11 +11,125 @@ interface VideoModalProps {
   videoId: string;
 }
 
+// YouTube Player API type
+interface YTPlayer {
+  playVideo: () => void;
+  pauseVideo: () => void;
+  getCurrentTime: () => number;
+  getPlayerState: () => number;
+  destroy: () => void;
+}
+
+declare global {
+  interface Window {
+    YT: {
+      Player: new (elementId: string, config: {
+        videoId: string;
+        playerVars?: Record<string, string | number>;
+        events?: {
+          onReady?: (event: { target: YTPlayer }) => void;
+          onStateChange?: (event: { data: number; target: YTPlayer }) => void;
+        };
+      }) => YTPlayer;
+      PlayerState: {
+        PLAYING: number;
+        PAUSED: number;
+        ENDED: number;
+      };
+    };
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
 export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<YTPlayer | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showCTA, setShowCTA] = useState(false);
+  const timeCheckIntervalRef = useRef<number | null>(null);
 
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=0&showinfo=0&disablekb=1&iv_load_policy=3`;
+  // Load YouTube IFrame API
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+  }, []);
+
+  // Initialize player when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setShowCTA(false);
+      
+      const initPlayer = () => {
+        if (window.YT && window.YT.Player) {
+          playerRef.current = new window.YT.Player('youtube-player', {
+            videoId: videoId,
+            playerVars: {
+              autoplay: 1,
+              rel: 0,
+              modestbranding: 1,
+              controls: 1,
+              showinfo: 0,
+              disablekb: 0,
+              iv_load_policy: 3
+            },
+            events: {
+              onReady: () => {
+                // Start time tracking
+                if (timeCheckIntervalRef.current) {
+                  clearInterval(timeCheckIntervalRef.current);
+                }
+                timeCheckIntervalRef.current = window.setInterval(() => {
+                  if (playerRef.current) {
+                    const currentTime = playerRef.current.getCurrentTime();
+                    // Show CTA at 8:50 (530 seconds)
+                    if (currentTime >= 530 && !showCTA) {
+                      setShowCTA(true);
+                    }
+                  }
+                }, 1000);
+              },
+              onStateChange: (event) => {
+                // Clear interval when video ends or is paused for too long
+                if (event.data === window.YT.PlayerState.ENDED) {
+                  if (timeCheckIntervalRef.current) {
+                    clearInterval(timeCheckIntervalRef.current);
+                  }
+                }
+              }
+            }
+          });
+        }
+      };
+
+      // Wait for YT API to be ready
+      if (window.YT && window.YT.Player) {
+        initPlayer();
+      } else {
+        window.onYouTubeIframeAPIReady = initPlayer;
+      }
+    }
+
+    return () => {
+      if (timeCheckIntervalRef.current) {
+        clearInterval(timeCheckIntervalRef.current);
+      }
+      if (playerRef.current) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
+  }, [isOpen, videoId]);
+
+  // Reset CTA when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setShowCTA(false);
+    }
+  }, [isOpen]);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -55,7 +170,7 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] mx-4 flex items-center justify-center"
+            className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] mx-4"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Controles do Modal */}
@@ -76,17 +191,11 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
               </button>
             </div>
 
-            {/* Iframe do Vídeo */}
-            <iframe
-              className="w-full h-full pointer-events-none"
-              src={embedUrl}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            {/* CTA Button */}
+            <VideoCTAButton isVisible={showCTA} />
 
-            {/* Camada de bloqueio de cliques no vídeo */}
-            <div className="absolute inset-0 z-20 bg-transparent cursor-default" />
+            {/* YouTube Player Container */}
+            <div id="youtube-player" className="w-full h-full" />
           </motion.div>
         </div>
       )}
