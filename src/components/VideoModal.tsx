@@ -71,10 +71,11 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
               autoplay: 1,
               rel: 0,
               modestbranding: 1,
-              controls: 1,
+              controls: 0,
               showinfo: 0,
-              disablekb: 0,
-              iv_load_policy: 3
+              disablekb: 1,
+              iv_load_policy: 3,
+              playsinline: 1
             },
             events: {
               onReady: () => {
@@ -85,15 +86,16 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
                 timeCheckIntervalRef.current = window.setInterval(() => {
                   if (playerRef.current) {
                     const currentTime = playerRef.current.getCurrentTime();
-                    // Show CTA at 8:50 (530 seconds)
+                    // Show CTA at 8:50 (530 seconds) and pause video
                     if (currentTime >= 530 && !showCTA) {
                       setShowCTA(true);
+                      playerRef.current?.pauseVideo();
                     }
                   }
                 }, 1000);
               },
               onStateChange: (event) => {
-                // Clear interval when video ends or is paused for too long
+                // Clear interval when video ends
                 if (event.data === window.YT.PlayerState.ENDED) {
                   if (timeCheckIntervalRef.current) {
                     clearInterval(timeCheckIntervalRef.current);
@@ -122,7 +124,7 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
         playerRef.current = null;
       }
     };
-  }, [isOpen, videoId]);
+  }, [isOpen, videoId, showCTA]);
 
   // Reset CTA when modal closes
   useEffect(() => {
@@ -173,8 +175,8 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
             className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] mx-4"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Controles do Modal */}
-            <div className="absolute top-4 right-4 flex items-center gap-2 z-40">
+            {/* Controles do Modal - apenas fullscreen e fechar */}
+            <div className="absolute top-4 right-4 flex items-center gap-2 z-50">
               <button
                 onClick={toggleFullscreen}
                 className="text-white/50 hover:text-white transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"
@@ -191,11 +193,16 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
               </button>
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button - aparece aos 8:50 com vídeo pausado */}
             <VideoCTAButton isVisible={showCTA} />
 
             {/* YouTube Player Container */}
-            <div id="youtube-player" className="w-full h-full" />
+            <div id="youtube-player" className="w-full h-full pointer-events-none" />
+            
+            {/* Overlay bloqueador - impede cliques no vídeo */}
+            {!showCTA && (
+              <div className="absolute inset-0 z-20 cursor-default" />
+            )}
           </motion.div>
         </div>
       )}

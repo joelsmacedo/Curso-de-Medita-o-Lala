@@ -17,7 +17,7 @@ export default function VideoCTAButton({ isVisible }: VideoCTAButtonProps) {
       initial={{ opacity: 0, scale: 0.8, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 no-underline"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-40 no-underline"
     >
       <div className="relative group">
         {/* Glow externo dourado */}
