@@ -53,6 +53,9 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen={false}
             />
+
+            {/* Overlay to block YouTube logo click */}
+            <div className="absolute bottom-0 right-0 w-24 h-12 pointer-events-none" />
           </motion.div>
         </div>
       )}
