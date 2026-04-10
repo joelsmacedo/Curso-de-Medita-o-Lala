@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Sparkles, Clock, MonitorPlay, Award, ShieldCheck, Star, Brain, Wind, Leaf, Flame, Waves, Eye, Heart, Calendar, Users, BookOpen, GraduationCap } from 'lucide-react';
+import { Sparkles, Clock, MonitorPlay, Award, ShieldCheck, Star, Brain, Wind, Leaf, Flame, Waves, Eye, Heart, Calendar, Users, BookOpen, GraduationCap, Play } from 'lucide-react';
+import { useState } from 'react';
+import VideoModal from './components/VideoModal';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 40 },
@@ -90,9 +93,26 @@ export default function App() {
               >
                 Iniciar Minha Jornada
               </a>
-              <p className="text-sm text-white/40 flex items-center justify-center gap-2">
-                <ShieldCheck className="w-4 h-4" /> Garantia de 7 dias
-              </p>
+              
+              {/* Video Thumbnail Trigger */}
+              <button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="group relative w-full sm:w-[200px] aspect-video rounded-xl overflow-hidden border border-white/20 hover:border-[#d4af37]/50 transition-all duration-300 hover:scale-105 shadow-lg"
+              >
+                <img
+                  src="https://img.youtube.com/vi/yG1_uQO_4lI/maxresdefault.jpg"
+                  alt="Garantia de 7 dias"
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Play className="w-5 h-5 text-black fill-black ml-1" />
+                  </div>
+                </div>
+                <div className="absolute bottom-2 left-2 right-2">
+                  <p className="text-xs font-semibold text-white drop-shadow-md">Ver garantia</p>
+                </div>
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -421,6 +441,13 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Video Modal */}
+      <VideoModal 
+        isOpen={isVideoModalOpen} 
+        onClose={() => setIsVideoModalOpen(false)} 
+        videoId="yG1_uQO_4lI" 
+      />
     </div>
   );
 }
