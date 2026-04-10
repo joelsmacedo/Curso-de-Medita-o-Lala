@@ -10,7 +10,7 @@ interface VideoModalProps {
 }
 
 export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps) {
-  // Construct optimized embed URL - hide YouTube branding
+  // modestsbranding=1 e rel=0 ajudam a reduzir a marca, mas a logo no canto ainda pode aparecer
   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&controls=1&fs=0&disablekb=1`;
 
   return (
@@ -33,7 +33,7 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] mx-4 cursor-default"
+            className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] mx-4"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -54,8 +54,8 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
               allowFullScreen={false}
             />
 
-            {/* Overlay to block YouTube logo click */}
-            <div className="absolute bottom-0 right-0 w-24 h-12 pointer-events-none" />
+            {/* Overlay invisível para bloquear o clique na logo do YouTube (canto inferior direito) */}
+            <div className="absolute bottom-0 right-0 w-[100px] h-[50px] z-10 cursor-default" />
           </motion.div>
         </div>
       )}
