@@ -16,6 +16,7 @@ interface YTPlayer {
   playVideo: () => void;
   pauseVideo: () => void;
   getCurrentTime: () => number;
+  getDuration: () => number;
   getPlayerState: () => number;
   destroy: () => void;
 }
@@ -46,6 +47,7 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
   const playerRef = useRef<YTPlayer | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showCTA, setShowCTA] = useState(false);
+  const [progress, setProgress] = useState(0);
   const timeCheckIntervalRef = useRef<number | null>(null);
 
   // Load YouTube IFrame API
@@ -86,6 +88,10 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
                 timeCheckIntervalRef.current = window.setInterval(() => {
                   if (playerRef.current) {
                     const currentTime = playerRef.current.getCurrentTime();
+                    const duration = playerRef.current.getDuration ? playerRef.current.getDuration() : 1;
+                    if (duration > 0) {
+                      setProgress((currentTime / duration) * 100);
+                    }
                     // Show CTA at 8:50 (530 seconds) and pause video
                     if (currentTime >= 530 && !showCTA) {
                       setShowCTA(true);
@@ -203,6 +209,14 @@ export default function VideoModal({ isOpen, onClose, videoId }: VideoModalProps
             {!showCTA && (
               <div className="absolute inset-0 z-20 cursor-default" />
             )}
+
+            {/* Barra de progresso visual */}
+            <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-black/40 z-30 pointer-events-none overflow-hidden">
+              <div 
+                className="h-full bg-[#d4af37] transition-all duration-1000 ease-linear"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
           </motion.div>
         </div>
       )}

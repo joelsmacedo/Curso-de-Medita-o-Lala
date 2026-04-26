@@ -291,6 +291,7 @@ export default function App() {
               src="https://lh3.googleusercontent.com/d/1QgtHCY7IQ17qi2syT1xZy2-SDhQqkETn"
               alt="Professor Laércio Fonseca"
               className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent"></div>
           </motion.div>
@@ -410,6 +411,7 @@ export default function App() {
               alt="mulher meditando"
               width="500"
               className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
           </motion.div>
