@@ -69,7 +69,7 @@ export default function FruitJourney() {
   return (
     <section
       id="vantagens"
-      className="bg-[#050505] text-white overflow-hidden py-32"
+      className="bg-[#050505] text-white overflow-hidden pt-32 pb-8"
     >
       <ScrollReveal>
         <div className="max-w-7xl mx-auto px-6 mb-[8vh] text-center">
@@ -98,7 +98,7 @@ export default function FruitJourney() {
             </div>
 
             {/* Bloco da Imagem com a Descrição sobreposta nela */}
-            <figure className="fruit-image-block relative w-full max-w-5xl min-h-[60vh] md:min-h-[90vh] flex items-center justify-center mb-[10vh] px-4 md:px-12">
+            <figure className={`fruit-image-block relative w-full max-w-5xl min-h-[60vh] md:min-h-[90vh] flex items-center justify-center ${i === fruits.length - 1 ? 'mb-0' : 'mb-[10vh]'} px-4 md:px-12`}>
               <CinematicScroll type="image" delay={100} className="w-full">
                 <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl bg-[#0a0a0a]">
                   <img

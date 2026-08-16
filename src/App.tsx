@@ -83,24 +83,10 @@ export default function App() {
 
       <FruitJourney />
       {/* SOBRE O PROFESSOR */}
-      <section id="professor" className="py-16 md:py-24 px-6 bg-[#050505]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section id="professor" className="pt-8 pb-16 md:pt-12 md:pb-24 px-6 bg-[#050505]">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="relative h-[400px] md:h-[500px] lg:h-[700px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a] order-2 lg:order-1"
-          >
-            <img
-              src="https://lh3.googleusercontent.com/d/1QgtHCY7IQ17qi2syT1xZy2-SDhQqkETn"
-              alt="Professor Laércio Fonseca"
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent"></div>
-          </motion.div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="order-1 lg:order-2"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-bold tracking-widest uppercase text-[#d4af37] mb-6">
               Seu Instrutor
@@ -114,6 +100,16 @@ export default function App() {
               <p>
                 Há mais de 50 anos desenvolve treinamento interior em artes marciais e espiritualismo. É fundador do Espaço Caminho Da Luz e da Associação Wu San Dji Tao, dedicando sua vida à disseminação de conhecimentos que transformam vidas.
               </p>
+            </div>
+
+            {/* Imagem do professor reposicionada */}
+            <div className="relative w-full h-[350px] md:h-[500px] rounded-[2rem] overflow-hidden border border-white/10 mb-10 bg-[#0a0a0a]">
+              <img
+                src="https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/lala%20meditando%20yoga%20-%20reduzido.webp"
+                alt="Professor Laércio Fonseca"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
 
             <div className="bg-gradient-to-r from-[#d4af37]/20 to-transparent border-l-4 border-[#d4af37] rounded-r-2xl p-6 mb-10">
