@@ -4,6 +4,7 @@ import { useState } from 'react';
 import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
 import FruitJourney from './components/FruitJourney';
+import FinalCTA from './components/FinalCTA';
 
 export default function App() {
 
@@ -233,6 +234,9 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+
+      {/* FINAL CTA */}
+      <FinalCTA />
 
       {/* FOOTER */}
       <Footer />
