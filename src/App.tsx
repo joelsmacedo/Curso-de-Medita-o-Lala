@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
 import FruitJourney from './components/FruitJourney';
 import FinalCTA from './components/FinalCTA';
+import KnowledgeUniverseSection from './components/KnowledgeUniverseSection';
 
 export default function App() {
 
@@ -104,7 +105,7 @@ export default function App() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-bold tracking-widest uppercase text-[#d4af37] mb-6">
               Seu Instrutor
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Professor Laércio Fonseca</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Prof. Laércio Fonseca</h2>
 
             <div className="space-y-6 text-white/70 text-lg leading-relaxed mb-10">
               <p>
@@ -237,6 +238,9 @@ export default function App() {
 
       {/* FINAL CTA */}
       <FinalCTA />
+
+      {/* UNIVERSO DO CONHECIMENTO (CARROSSEL EBOOKS & CURSOS) */}
+      <KnowledgeUniverseSection />
 
       {/* FOOTER */}
       <Footer />

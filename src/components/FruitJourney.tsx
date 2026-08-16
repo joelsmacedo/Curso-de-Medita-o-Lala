@@ -6,7 +6,7 @@ type FruitItem = {
   titleLines: string[];
   description: string;
   image: string;
-  textPosition: string;
+  textPosition?: string;
   align?: 'left' | 'right';
   theme?: 'light' | 'dark';
   offsetY?: string;
@@ -18,6 +18,7 @@ const fruits: FruitItem[] = [
     titleLines: ["Paz Interior", "Verdadeira"],
     description: "Encontre um refúgio de serenidade inabalável dentro de si mesmo.",
     image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/MOBILE/1.webp",
+    offsetY: "20px",
   },
   {
     title: "Redução da Ansiedade",
@@ -30,6 +31,7 @@ const fruits: FruitItem[] = [
     titleLines: ["Autocontrole e", "Clareza"],
     description: "Tome decisões com mais sabedoria e mantenha o foco no que importa.",
     image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/MOBILE/3.webp",
+    offsetY: "-30px",
   },
   {
     title: "Expansão da Intuição",
@@ -70,7 +72,7 @@ export default function FruitJourney() {
       className="bg-[#050505] text-white overflow-hidden py-32"
     >
       <ScrollReveal>
-        <div className="max-w-7xl mx-auto px-6 mb-[15vh] text-center">
+        <div className="max-w-7xl mx-auto px-6 mb-[8vh] text-center">
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Os Frutos da Prática
           </h2>
@@ -85,9 +87,9 @@ export default function FruitJourney() {
           <div key={i} className="w-full flex flex-col items-center relative">
 
             {/* Bloco do Título Isolado */}
-            <div className="fruit-title-block w-full min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center px-6">
+            <div className="fruit-title-block w-full min-h-[30vh] md:min-h-[45vh] flex flex-col items-center justify-center px-6">
               <CinematicScroll type="title" delay={0}>
-                <h3 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight text-center text-white">
+                <h3 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-none tracking-tight text-center text-white">
                   {fruit.titleLines.map((line, idx) => (
                     <span key={idx} className="block">{line}</span>
                   ))}
@@ -96,7 +98,7 @@ export default function FruitJourney() {
             </div>
 
             {/* Bloco da Imagem com a Descrição sobreposta nela */}
-            <figure className="fruit-image-block relative w-full max-w-5xl min-h-[60vh] md:min-h-[90vh] flex items-center justify-center mb-[15vh] px-4 md:px-12">
+            <figure className="fruit-image-block relative w-full max-w-5xl min-h-[60vh] md:min-h-[90vh] flex items-center justify-center mb-[10vh] px-4 md:px-12">
               <CinematicScroll type="image" delay={100} className="w-full">
                 <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl bg-[#0a0a0a]">
                   <img
@@ -110,7 +112,10 @@ export default function FruitJourney() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent pointer-events-none"></div>
 
                   {/* Descrição na parte inferior da imagem */}
-                  <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 flex flex-col justify-end items-center text-center z-10 pointer-events-none">
+                  <div 
+                    className="absolute bottom-0 left-0 w-full p-8 pb-16 md:p-12 md:pb-24 flex flex-col justify-end items-center text-center z-10 pointer-events-none"
+                    style={{ transform: fruit.offsetY ? `translateY(${fruit.offsetY})` : undefined }}
+                  >
                     <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-[1.4] text-white/95 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
                       {fruit.description}
                     </p>
