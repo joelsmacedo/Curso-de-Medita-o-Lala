@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
 import { Sparkles, Clock, MonitorPlay, Award, ShieldCheck, Brain, Wind, Leaf, Flame, Waves, Eye, Heart, Calendar, Users, BookOpen, GraduationCap, Play } from 'lucide-react';
 import { useState } from 'react';
-import VideoModal from './components/VideoModal';
+import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
+import FruitJourney from './components/FruitJourney';
 
 export default function App() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 40 },
@@ -45,79 +45,11 @@ export default function App() {
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[85dvh] flex items-start md:items-center justify-center pt-32 md:pt-20 px-6 pb-12 md:pb-0">
-        <div className="absolute inset-0 z-0">
-          <div className="w-full h-full">
-            <img 
-              src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=2000&auto=format&fit=crop" 
-              alt="Meditação" 
-              className="w-full h-full object-cover opacity-40"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-[#050505]/80 to-[#050505]"></div>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <motion.div 
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="space-y-6"
-          >
-            <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-sm font-medium text-[#d4af37] mb-4">
-              <Sparkles className="w-4 h-4" />
-              <span>Jornada Espiritual Completa</span>
-            </motion.div>
-            
-            <motion.h1 variants={fadeIn} className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight">
-              Desperte sua <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#d4af37] to-white/50">
-                Consciência
-              </span>
-            </motion.h1>
-            
-            <motion.p variants={fadeIn} className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto font-light leading-relaxed">
-              Uma jornada profunda por 23 práticas sagradas. Da Meditação Dinâmica do Osho 
-              à Meditação Zen Budista. Transforme sua mente, corpo e espírito no seu próprio ritmo.
-            </motion.p>
-            
-            <motion.div variants={fadeIn} className="pt-8 flex flex-col-reverse sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://pay.hotmart.com/N69139177Q?off=ztjix57g&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=meditacao"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:bg-[#d4af37] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] text-center"
-              >
-                Iniciar Minha Jornada
-              </a>
-              
-              <button
-                onClick={() => setIsVideoModalOpen(true)}
-                className="group relative w-full sm:w-[200px] aspect-video rounded-xl overflow-hidden border border-white/20 hover:border-[#d4af37]/50 transition-all duration-300 hover:scale-105 shadow-lg"
-              >
-                <img
-                  src="https://img.youtube.com/vi/yG1_uQO_4lI/maxresdefault.jpg"
-                  alt="Garantia de 7 dias"
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <Play className="w-5 h-5 text-black fill-black ml-1" />
-                  </div>
-                </div>
-                <div className="absolute bottom-2 left-2 right-2">
-                  <p className="text-xs font-semibold text-white drop-shadow-md">Ver garantia</p>
-                </div>
-              </button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* MARQUEE */}
       <div className="py-10 border-y border-white/5 bg-[#0a0a0a] overflow-hidden flex whitespace-nowrap">
-        <motion.div 
+        <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
           className="flex gap-16 items-center font-display text-xl md:text-2xl text-white/40 uppercase tracking-widest"
@@ -147,52 +79,7 @@ export default function App() {
 
 
 
-      {/* VANTAGENS / BENEFÍCIOS */}
-      <section id="vantagens" className="py-16 md:py-24 px-6 bg-[#050505]">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeIn}
-            className="mb-16 text-center"
-          >
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Os Frutos da Prática</h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">Sinta as transformações profundas que a meditação oriental trará para a sua vida diária.</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Heart, title: "Paz Interior Verdadeira", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/1%20-Paz%20Interior%20Verdadeira%20card.webp" },
-              { icon: Brain, title: "Redução da Ansiedade", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/2%20-%20Redu%C3%A7%C3%A3o%20da%20Ansiedade%202%20-%20Redu%C3%A7%C3%A3o%20da%20Ansiedade%20card.webp" },
-              { icon: Wind, title: "Autocontrole e Clareza", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/3%20-%20Autocontrole%20e%20Clareza%20card.webp" },
-              { icon: Sparkles, title: "Expansão da Intuição", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/4%20-%20Expans%C3%A3o%20da%20Intui%C3%A7%C3%A3o%20-%20gemini%20card.webp" },
-              { icon: Leaf, title: "Conexão com o Presente", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/5%20-%20Conex%C3%A3o%20com%20o%20Presente%20-%20gemini%20card.webp" },
-              { icon: Flame, title: "Cura Emocional", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/6%20-%20Cura%20Emocional%20gemini%202%20card.webp" },
-              { icon: Waves, title: "Elevação Vibracional", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/7%20-%20Eleva%C3%A7%C3%A3o%20Vibracional%20gemini%202%20card.webp" },
-              { icon: Eye, title: "Despertar Espiritual", image: "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/SESS%C3%83O%20FRUTOS%20DA%20PR%C3%81TICA/CARDS/8%20-%20Despertar%20Espiritual%20gemini%20card.webp" }
-            ].map((benefit, i) => (
-              <motion.div 
-                key={i}
-                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-                className="relative bg-[#0a0a0a] p-8 rounded-[2rem] border border-white/5 hover:border-[#d4af37]/30 transition-colors group overflow-hidden min-h-[220px] flex flex-col justify-end"
-              >
-                <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500 z-0">
-                  <img src={benefit.image} alt={benefit.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent"></div>
-                </div>
-                <div className="relative z-10 h-full flex flex-col justify-between">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm border border-white/10">
-                    <benefit.icon className="w-6 h-6 text-[#d4af37]" />
-                  </div>
-                  <h3 className="font-display font-bold text-xl">{benefit.title}</h3>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <FruitJourney />
       {/* SOBRE O PROFESSOR */}
       <section id="professor" className="py-16 md:py-24 px-6 bg-[#050505]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -209,7 +96,7 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent"></div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             className="order-1 lg:order-2"
           >
@@ -217,7 +104,7 @@ export default function App() {
               Seu Instrutor
             </div>
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Professor Laércio Fonseca</h2>
-            
+
             <div className="space-y-6 text-white/70 text-lg leading-relaxed mb-10">
               <p>
                 Físico formado pela Unicamp (1980), especializado em Astrofísica e Cosmologia, o Professor Laércio Fonseca é uma das maiores autoridades brasileiras na união entre ciência e espiritualidade.
@@ -249,7 +136,7 @@ export default function App() {
                 <div className="font-display font-bold text-xl text-white mb-1">9 livros</div>
                 <div className="text-xs text-white/50">publicados</div>
               </div>
-              <motion.a 
+              <motion.a
                 href="#cursos"
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -267,7 +154,7 @@ export default function App() {
       {/* MODULES / ABOUT */}
       <section id="modulos" className="py-16 md:py-24 px-6 bg-[#0a0a0a] border-y border-white/5">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             className="mb-12"
           >
@@ -278,59 +165,59 @@ export default function App() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
-            <motion.div 
+            <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {[
-                "Meditação das 12 mudras sagradas",
-                "Meditação dos mantras sagrados",
-                "Meditação das mandalas sagradas",
-                "Meditação budista dos 7 chacras",
-                "Meditação Raja Yoga",
-                "Meditação usando cristais",
-                "Meditação dinâmica do Osho",
-                "Meditação e Cria Yoga",
-                "Meditação Cromoterapia Sagrada",
-                "Meditação New Age",
-                "Meditação Zen Budista",
-                "Meditação de anjos protetores",
-                "Meditação da cura interior",
-                "Meditação para a paz planetária",
-                "Invocação dos seres extraterrestres",
-                "Os alimentos corretos para pratica",
-                "Meditação Taoista",
-                "Tchi-Kun e a Meditação Taoísta",
-                "Yoga e Meditação Indiana",
-                "Meditação Bhudista Vipassana",
-                "Meditação Braktivedanta",
-                "Meditação Tântrica Kundalini",
-                "Meditação Hari Krishna"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37] shrink-0"></div>
-                  <span className="font-medium text-sm text-white/80">{item}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="relative h-full min-h-[400px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a]"
-          >
-            <img
-              src="https://lh3.googleusercontent.com/d/15ldHHAysswb3yGz4Wu9uYA5aJdIe1-5Y"
-              alt="mulher meditando"
-              width="500"
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
-          </motion.div>
+                {[
+                  "Meditação das 12 mudras sagradas",
+                  "Meditação dos mantras sagrados",
+                  "Meditação das mandalas sagradas",
+                  "Meditação budista dos 7 chacras",
+                  "Meditação Raja Yoga",
+                  "Meditação usando cristais",
+                  "Meditação dinâmica do Osho",
+                  "Meditação e Cria Yoga",
+                  "Meditação Cromoterapia Sagrada",
+                  "Meditação New Age",
+                  "Meditação Zen Budista",
+                  "Meditação de anjos protetores",
+                  "Meditação da cura interior",
+                  "Meditação para a paz planetária",
+                  "Invocação dos seres extraterrestres",
+                  "Os alimentos corretos para pratica",
+                  "Meditação Taoista",
+                  "Tchi-Kun e a Meditação Taoísta",
+                  "Yoga e Meditação Indiana",
+                  "Meditação Bhudista Vipassana",
+                  "Meditação Braktivedanta",
+                  "Meditação Tântrica Kundalini",
+                  "Meditação Hari Krishna"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37] shrink-0"></div>
+                    <span className="font-medium text-sm text-white/80">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+              className="relative h-full min-h-[400px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a]"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/d/15ldHHAysswb3yGz4Wu9uYA5aJdIe1-5Y"
+                alt="mulher meditando"
+                width="500"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
+            </motion.div>
           </div>
-        
-          <motion.div 
+
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             className="mt-16 text-center"
           >
@@ -347,15 +234,10 @@ export default function App() {
         </div>
       </section>
 
-{/* FOOTER */}
+      {/* FOOTER */}
       <Footer />
 
-      {/* Video Modal */}
-      <VideoModal 
-        isOpen={isVideoModalOpen} 
-        onClose={() => setIsVideoModalOpen(false)} 
-        videoId="yG1_uQO_4lI" 
-      />
+
     </div>
   );
 }
