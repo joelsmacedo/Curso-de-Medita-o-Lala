@@ -92,7 +92,7 @@ const HeroSection = () => {
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-sm font-medium text-[#d4af37] mb-4">
               <Sparkles className="w-4 h-4" />
-              <span>Jornada Espiritual Completa</span>
+              <span>Jornada Meditativa Completa</span>
             </div>
 
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight">
