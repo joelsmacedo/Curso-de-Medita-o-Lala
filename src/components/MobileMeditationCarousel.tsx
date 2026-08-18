@@ -4,12 +4,12 @@ import { gsap } from 'gsap';
 const baseUrl = "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/O%20QUE%20VC%20VAI%20APRENDER/";
 
 const meditations = [
-  { title: "12 Mudras Sagrados", image: "12 mudras sagradas.webp", description: "Gestos ancestrais das mãos que ajudam a harmonizar a energia, aquietar a mente e aprofundar a conexão com seu interior", textColor: "#3e1b09", textShadow: "none", fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif", fontWeight: "bold", fontSize: "19px" },
+  { title: "12 Mudras Sagrados", image: "12 mudras sagradas.webp", description: "Gestos ancestrais das mãos que ajudam a harmonizar a energia, aquietar a mente e aprofundar a conexão com seu interior", textColor: "#3e1b09", textShadow: "none", fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif", fontWeight: "bold", fontSize: "19px" },
   { title: "Meditação das Mandalas Sagradas", image: "mandala_sagrada_meditacao.webp", description: "Utilize formas, símbolos e padrões geométricos como pontos de concentração, favorecendo a contemplação, a presença e a interiorização." },
   { title: "Meditação Raja Yoga", image: "Meditação Raja Yoga.webp", description: "Uma tradição de meditação associada ao Yoga clássico, voltada ao controle da mente, à concentração e ao desenvolvimento da consciência interior." },
   { title: "Meditação Dinâmica de Osho", image: "meditacao-dinamica-osho.webp", description: "Prática ativa que combina movimento, respiração, expressão emocional e períodos de silêncio, buscando liberar tensões e aprofundar a percepção de si." },
   { title: "Meditação com Cromoterapia Sagrada", image: "meditacao-cromoterapia-sagrada.webp", description: "Utiliza a contemplação e a visualização de cores dentro de uma abordagem espiritual, associando diferentes tonalidades a estados simbólicos de equilíbrio e consciência." },
-  { title: "Meditação Zen Budista", image: "meditacao-zen-budista - ajustado.webp", description: "Prática contemplativa do Zen que enfatiza a atenção plena, a postura, a respiração e a observação da experiência presente sem apego.", textColor: "#000000", textShadow: "none", fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif", fontWeight: "bold", fontSize: "19px" },
+  { title: "Meditação Zen Budista", image: "meditacao-zen-budista - ajustado.webp", description: "Prática contemplativa do Zen que enfatiza a atenção plena, a postura, a respiração e a observação da experiência presente sem apego.", textColor: "#000000", textShadow: "none", fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif", fontWeight: "bold", fontSize: "19px" },
   { title: "Meditação da Cura Interior", image: "meditacao_cura_interior.webp", description: "Prática de introspecção voltada à observação das emoções, memórias e padrões pessoais, buscando cultivar acolhimento, autoconhecimento e equilíbrio interior." },
   { title: "Invocação dos Seres Extraterrestres", image: "invocacao_seres_extraterrestres.webp", description: "Uma prática de caráter esotérico que utiliza meditação, visualização e intenção para estabelecer, segundo essa perspectiva espiritual, uma conexão com consciências extraterrestres." },
   { title: "Meditação Taoista", image: "meditacao-taoista.webp", description: "Conjunto de práticas contemplativas da tradição taoista que trabalha respiração, quietude, atenção e cultivo da energia vital, frequentemente associado ao conceito de Qi.", textColor: "#1e3d28", textShadow: "none" },
@@ -128,8 +128,8 @@ export default function MobileMeditationCarousel() {
           const newColor = (meditations[activeIndex] as any).textColor || '#ffffff';
           const oldShadow = (meditations[prevActiveIndex.current] as any).textShadow !== undefined ? (meditations[prevActiveIndex.current] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
           const newShadow = (meditations[activeIndex] as any).textShadow !== undefined ? (meditations[activeIndex] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
-          const oldFont = (meditations[prevActiveIndex.current] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif";
-          const newFont = (meditations[activeIndex] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif";
+          const oldFont = (meditations[prevActiveIndex.current] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif";
+          const newFont = (meditations[activeIndex] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif";
           const oldWeight = (meditations[prevActiveIndex.current] as any).fontWeight || 'normal'; // normal by default
           const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
           const oldSize = (meditations[prevActiveIndex.current] as any).fontSize || '15px';
@@ -183,7 +183,7 @@ export default function MobileMeditationCarousel() {
           currentDescRef.current.textContent = meditations[activeIndex].description;
           const newColor = (meditations[activeIndex] as any).textColor || '#ffffff';
           const newShadow = (meditations[activeIndex] as any).textShadow !== undefined ? (meditations[activeIndex] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
-          const newFont = (meditations[activeIndex] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif";
+          const newFont = (meditations[activeIndex] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif";
           const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
           const newSize = (meditations[activeIndex] as any).fontSize || '15px';
           gsap.set(currentDescRef.current, { opacity: 1, y: 0, color: newColor, textShadow: newShadow, fontFamily: newFont, fontWeight: newWeight, fontSize: newSize });
@@ -302,7 +302,7 @@ export default function MobileMeditationCarousel() {
       <div className="relative w-full flex-1 min-h-[300px] max-h-[55vh] flex justify-center items-center mt-4 z-10 pointer-events-none">
         <div
           ref={imageContainerRef}
-          className="relative w-[min(82vw,380px)] h-full max-h-[550px] rounded-[2rem] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.6)] border border-white/10"
+          className="relative w-[min(82vw,380px)] h-full max-h-[550px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.6)] border border-white/10"
         >
           {/* Old Image for Crossfade */}
           <img

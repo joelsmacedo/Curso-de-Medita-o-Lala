@@ -163,7 +163,7 @@ export default function FruitJourney() {
                   >
                     <p 
                       className="text-2xl md:text-3xl lg:text-4xl font-normal leading-[1.4] text-white/95 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
-                      style={{ fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif" }}
+                      style={{ fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif" }}
                     >
                       {fruit.description}
                     </p>
