@@ -255,7 +255,7 @@ export default function MobileMeditationCarousel() {
     >
       {/* Swipe/Drag Area delimited to the titles and top half of the image */}
       <div 
-        className="absolute top-0 left-0 w-full h-[60%] z-40 touch-none"
+        className="absolute top-[15%] left-0 w-full h-[50%] z-40 touch-none"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
