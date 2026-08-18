@@ -157,12 +157,14 @@ export default function FruitJourney() {
                   </picture>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent pointer-events-none"></div>
 
-                  {/* Descrição na parte inferior da imagem */}
                   <div 
                     className="absolute bottom-0 left-0 w-full p-8 pb-16 md:p-12 md:pb-24 flex flex-col justify-end items-center text-center z-10 pointer-events-none"
                     style={{ transform: fruit.offsetY ? `translateY(${fruit.offsetY})` : undefined }}
                   >
-                    <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-[1.4] text-white/95 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
+                    <p 
+                      className="text-2xl md:text-3xl lg:text-4xl font-normal leading-[1.4] text-white/95 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]"
+                      style={{ fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif" }}
+                    >
                       {fruit.description}
                     </p>
                   </div>
