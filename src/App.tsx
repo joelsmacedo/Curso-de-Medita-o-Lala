@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import FruitJourney from './components/FruitJourney';
 import FinalCTA from './components/FinalCTA';
 import KnowledgeUniverseSection from './components/KnowledgeUniverseSection';
-
+import MobileMeditationCarousel from './components/MobileMeditationCarousel';
 export default function App() {
 
   const fadeIn = {
@@ -155,8 +155,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* MODULES / ABOUT */}
-      <section id="modulos" className="py-16 md:py-24 px-6 bg-[#0a0a0a] border-y border-white/5">
+      {/* MODULES / ABOUT (DESKTOP) */}
+      <section id="modulos" className="hidden md:block py-16 md:py-24 px-6 bg-[#0a0a0a] border-y border-white/5">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
@@ -237,6 +237,11 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+
+      {/* MOBILE MEDITATION CAROUSEL (MOBILE) */}
+      <div className="block md:hidden border-y border-white/5">
+        <MobileMeditationCarousel />
+      </div>
 
       {/* FINAL CTA */}
       <FinalCTA />
