@@ -249,15 +249,19 @@ export default function MobileMeditationCarousel() {
 
   return (
     <section
-      className="relative w-full h-[100svh] min-h-[600px] overflow-hidden bg-[#0a0a0a] touch-none flex flex-col items-center justify-center pt-8 pb-12"
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-      onPointerLeave={handlePointerUp}
+      className="relative w-full h-[100svh] min-h-[600px] overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-center pt-8 pb-12"
       aria-label="Carrossel de Meditações"
       role="region"
     >
+      {/* Swipe/Drag Area delimited to the titles and top half of the image */}
+      <div 
+        className="absolute top-0 left-0 w-full h-[60%] z-40 touch-none"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onPointerLeave={handlePointerUp}
+      />
       {/* Background ambient glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
         <div className="w-[80vw] h-[80vw] rounded-full bg-[#d4af37]/5 blur-[80px]" />
