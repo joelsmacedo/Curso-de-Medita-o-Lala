@@ -3,30 +3,33 @@ import { gsap } from 'gsap';
 
 const baseUrl = "https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/O%20QUE%20VC%20VAI%20APRENDER/";
 
+const DEFAULT_FONT_FAMILY = "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', sans-serif";
+const DEFAULT_FONT_SIZE = "17.5px";
+
 const meditations = [
-  { title: "12 Mudras Sagrados", image: "12 mudras sagradas.webp", description: "Gestos ancestrais das mãos que ajudam a harmonizar a energia, aquietar a mente e aprofundar a conexão com seu interior", textColor: "#3e1b09", textShadow: "none", fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif", fontWeight: "bold", fontSize: "19px" },
-  { title: "Meditação das Mandalas Sagradas", image: "mandala_sagrada_meditacao.webp", description: "Utilize formas, símbolos e padrões geométricos como pontos de concentração, favorecendo a contemplação, a presença e a interiorização." },
-  { title: "Meditação Raja Yoga", image: "Meditação Raja Yoga.webp", description: "Uma tradição de meditação associada ao Yoga clássico, voltada ao controle da mente, à concentração e ao desenvolvimento da consciência interior." },
-  { title: "Meditação Dinâmica de Osho", image: "meditacao-dinamica-osho.webp", description: "Prática ativa que combina movimento, respiração, expressão emocional e períodos de silêncio, buscando liberar tensões e aprofundar a percepção de si." },
-  { title: "Meditação com Cromoterapia Sagrada", image: "meditacao-cromoterapia-sagrada.webp", description: "Utiliza a contemplação e a visualização de cores dentro de uma abordagem espiritual, associando diferentes tonalidades a estados simbólicos de equilíbrio e consciência." },
-  { title: "Meditação Zen Budista", image: "meditacao-zen-budista - ajustado.webp", description: "Prática contemplativa do Zen que enfatiza a atenção plena, a postura, a respiração e a observação da experiência presente sem apego.", textColor: "#000000", textShadow: "none", fontFamily: "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif", fontWeight: "bold", fontSize: "19px" },
-  { title: "Meditação da Cura Interior", image: "meditacao_cura_interior.webp", description: "Prática de introspecção voltada à observação das emoções, memórias e padrões pessoais, buscando cultivar acolhimento, autoconhecimento e equilíbrio interior." },
-  { title: "Invocação dos Seres Extraterrestres", image: "invocacao_seres_extraterrestres.webp", description: "Uma prática de caráter esotérico que utiliza meditação, visualização e intenção para estabelecer, segundo essa perspectiva espiritual, uma conexão com consciências extraterrestres." },
-  { title: "Meditação Taoista", image: "meditacao-taoista.webp", description: "Conjunto de práticas contemplativas da tradição taoista que trabalha respiração, quietude, atenção e cultivo da energia vital, frequentemente associado ao conceito de Qi.", textColor: "#1e3d28", textShadow: "none" },
-  { title: "Yoga e Meditação Indiana", image: "yoga-meditacao-indiana.webp", description: "Integra práticas tradicionais indianas de postura, respiração, concentração e meditação, buscando desenvolver equilíbrio entre corpo, mente e consciência." },
-  { title: "Meditação Bhaktivedanta", image: "meditacao-bhaktivedanta.webp", description: "Prática inspirada nos ensinamentos de Bhaktivedanta Swami Prabhupada e na tradição Gaudiya Vaishnava, com ênfase na devoção, contemplação e repetição de nomes sagrados." },
-  { title: "Meditação Hare Krishna", image: "hare_krishna_meditacao.webp", description: "Prática devocional baseada principalmente no canto e na repetição do mantra Hare Krishna, utilizado como instrumento de concentração e devoção espiritual." },
-  { title: "Meditação dos Mantras Sagrados", image: "meditacao_mantras_sagrados.webp", description: "Utiliza a repetição consciente de sons, palavras ou fórmulas tradicionais como objeto de concentração, promovendo ritmo respiratório, foco e interiorização." },
-  { title: "Meditação Budista dos 7 Chakras", image: "meditacao-budista-7-chakras.webp", description: "Uma abordagem contemporânea que combina elementos de meditação budista com o sistema dos sete chakras, utilizando concentração e visualização para trabalhar diferentes dimensões simbólicas da experiência interior." },
-  { title: "Meditação com Cristais", image: "meditacao_com_cristais.webp", description: "Prática esotérica que utiliza cristais como objetos de contemplação, concentração ou ritual, atribuindo-lhes significados simbólicos relacionados à energia e ao equilíbrio." },
-  { title: "Meditação e Kriya Yoga", image: "meditacao-kriya-yoga-landing.webp", description: "Prática associada a tradições de Yoga que enfatizam técnicas de respiração, concentração e meditação como caminhos para aprofundar a disciplina interior e a consciência." },
-  { title: "Meditação New Age", image: "meditacao-new-age.webp", description: "Abordagem espiritual contemporânea que reúne técnicas e conceitos de diferentes tradições, frequentemente envolvendo visualização, energia, consciência, espiritualidade e autoconhecimento." },
-  { title: "Meditação com Anjos Protetores", image: "meditacao_anjos_protetores.webp", description: "Prática de caráter devocional e esotérico baseada na visualização, oração ou contemplação de seres angelicais como símbolos de proteção, orientação e amparo espiritual." },
-  { title: "Meditação para a Paz Planetária", image: "meditacao_paz_planetaria.webp", description: "Prática contemplativa coletiva ou individual que utiliza visualizações, intenções e orações direcionadas simbolicamente à paz, à harmonia e à fraternidade entre os povos." },
-  { title: "Alimentação para a Prática", image: "alimentacao_para_a_pratica.webp", description: "Reflexão sobre hábitos alimentares e escolhas nutricionais que podem favorecer disposição, conforto digestivo e bem-estar durante práticas de meditação e Yoga." },
-  { title: "Chi Kung e Meditação Taoista", image: "chi-kung-meditacao-taoista.webp", description: "Integra exercícios tradicionais de movimento, respiração e atenção do Qi Gong com práticas contemplativas taoistas, buscando cultivar presença, equilíbrio corporal e serenidade." },
-  { title: "Meditação Budista Vipassana", image: "vipassana_meditacao.webp", description: "Prática contemplativa tradicional que desenvolve a atenção cuidadosa sobre corpo, sensações, estados mentais e fenômenos da experiência, cultivando clareza e compreensão." },
-  { title: "Meditação Tântrica Kundalini", image: "meditação kundalini.webp", description: "Prática inspirada em tradições tântricas e de Yoga que trabalha respiração, concentração, mantras e visualizações relacionadas ao conceito de Kundalini e aos centros energéticos." }
+  { title: "12 Mudras Sagrados", image: "12 mudras sagradas.webp", description: "Gestos ancestrais das mãos que ajudam a harmonizar a energia, aquietar a mente e aprofundar a conexão com seu interior", textColor: "#3e1b09", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold", fontSize: "19px" },
+  { title: "Meditação das Mandalas Sagradas", image: "mandala_sagrada_meditacao.webp", description: "Utilize formas, símbolos e padrões geométricos como pontos de concentração, favorecendo a contemplação, a presença e a interiorização.", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "600", fontSize: "18.5px" },
+  { title: "Meditação Raja Yoga", image: "Meditação Raja Yoga.webp", description: "Uma tradição de meditação associada ao Yoga clássico, voltada ao controle da mente, à concentração e ao desenvolvimento da consciência interior.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação Dinâmica de Osho", image: "meditacao-dinamica-osho.webp", description: "Prática ativa que combina movimento, respiração, expressão emocional e períodos de silêncio, buscando liberar tensões e aprofundar a percepção de si.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação com Cromoterapia Sagrada", image: "meditacao-cromoterapia-sagrada.webp", description: "Utiliza a contemplação e a visualização de cores dentro de uma abordagem espiritual, associando diferentes tonalidades a estados simbólicos de equilíbrio e consciência.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação Zen Budista", image: "meditacao-zen-budista - ajustado.webp", description: "Prática contemplativa do Zen que enfatiza a atenção plena, a postura, a respiração e a observação da experiência presente sem apego.", textColor: "#000000", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold", fontSize: "19px" },
+  { title: "Meditação da Cura Interior", image: "meditacao_cura_interior.webp", description: "Prática de introspecção voltada à observação das emoções, memórias e padrões pessoais, buscando cultivar acolhimento, autoconhecimento e equilíbrio interior.", textColor: "#3e1b09", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold" },
+  { title: "Invocação dos Seres Extraterrestres", image: "invocacao_seres_extraterrestres.webp", description: "Uma prática de caráter esotérico que utiliza meditação, visualização e intenção para estabelecer, segundo essa perspectiva espiritual, uma conexão com consciências extraterrestres.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação Taoista", image: "meditacao-taoista.webp", description: "Conjunto de práticas contemplativas da tradição taoista que trabalha respiração, quietude, atenção e cultivo da energia vital, frequentemente associado ao conceito de Qi.", textColor: "#1e3d28", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold" },
+  { title: "Yoga e Meditação Indiana", image: "yoga-meditacao-indiana.webp", description: "Integra práticas tradicionais indianas de postura, respiração, concentração e meditação, buscando desenvolver equilíbrio entre corpo, mente e consciência.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação Bhaktivedanta", image: "meditacao-bhaktivedanta.webp", description: "Prática inspirada nos ensinamentos de Bhaktivedanta Swami Prabhupada e na tradição Gaudiya Vaishnava, com ênfase na devoção, contemplação e repetição de nomes sagrados.", textColor: "#3e1b09", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "600" },
+  { title: "Meditação Hare Krishna", image: "hare_krishna_meditacao.webp", description: "Prática devocional baseada principalmente no canto e na repetição do mantra Hare Krishna, utilizado como instrumento de concentração e devoção espiritual.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação dos Mantras Sagrados", image: "meditacao_mantras_sagrados.webp", description: "Utiliza a repetição consciente de sons, palavras ou fórmulas tradicionais como objeto de concentração, promovendo ritmo respiratório, foco e interiorização.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação Budista dos 7 Chakras", image: "meditacao-budista-7-chakras.webp", description: "Uma abordagem contemporânea que combina elementos de meditação budista com o sistema dos sete chakras, utilizando concentração e visualização para trabalhar diferentes dimensões simbólicas da experiência interior.", fontFamily: DEFAULT_FONT_FAMILY, fontSize: "15px" },
+  { title: "Meditação com Cristais", image: "meditacao_com_cristais.webp", description: "Prática esotérica que utiliza cristais como objetos de contemplação, concentração ou ritual, atribuindo-lhes significados simbólicos relacionados à energia e ao equilíbrio.", textColor: "#3e1b09", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "600" },
+  { title: "Meditação e Kriya Yoga", image: "meditacao-kriya-yoga-landing.webp", description: "Prática associada a tradições de Yoga que enfatizam técnicas de respiração, concentração e meditação como caminhos para aprofundar a disciplina interior e a consciência.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação New Age", image: "meditacao-new-age.webp", description: "Abordagem espiritual contemporânea que reúne técnicas e conceitos de diferentes tradições, frequentemente envolvendo visualização, energia, consciência, espiritualidade e autoconhecimento.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação com Anjos Protetores", image: "meditacao_anjos_protetores.webp", description: "Prática de caráter devocional e esotérico baseada na visualização, oração ou contemplação de seres angelicais como símbolos de proteção, orientação e amparo espiritual.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Meditação para a Paz Planetária", image: "meditacao_paz_planetaria.webp", description: "Prática contemplativa coletiva ou individual que utiliza visualizações, intenções e orações direcionadas simbolicamente à paz, à harmonia e à fraternidade entre os povos.", fontFamily: DEFAULT_FONT_FAMILY },
+  { title: "Alimentação para a Prática", image: "alimentacao_para_a_pratica.webp", description: "Reflexão sobre hábitos alimentares e escolhas nutricionais que podem favorecer disposição, conforto digestivo e bem-estar durante práticas de meditação e Yoga.", textColor: "#3e1b09", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold" },
+  { title: "Chi Kung e Meditação Taoista", image: "chi-kung-meditacao-taoista.webp?v=2", description: "Integra exercícios tradicionais de movimento, respiração e atenção do Qi Gong com práticas contemplativas taoistas, buscando cultivar presença, equilíbrio corporal e serenidade.", textColor: "#1e3d28", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold" },
+  { title: "Meditação Budista Vipassana", image: "vipassana_meditacao.webp", description: "Prática contemplativa tradicional que desenvolve a atenção cuidadosa sobre corpo, sensações, estados mentais e fenômenos da experiência, cultivando clareza e compreensão.", textColor: "#1a241f", textShadow: "none", fontFamily: DEFAULT_FONT_FAMILY, fontWeight: "bold" },
+  { title: "Meditação Tântrica Kundalini", image: "meditação kundalini.webp", description: "Prática inspirada em tradições tântricas e de Yoga que trabalha respiração, concentração, mantras e visualizações relacionadas ao conceito de Kundalini e aos centros energéticos.", fontFamily: DEFAULT_FONT_FAMILY }
 ];
 
 export default function MobileMeditationCarousel() {
@@ -128,12 +131,12 @@ export default function MobileMeditationCarousel() {
           const newColor = (meditations[activeIndex] as any).textColor || '#ffffff';
           const oldShadow = (meditations[prevActiveIndex.current] as any).textShadow !== undefined ? (meditations[prevActiveIndex.current] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
           const newShadow = (meditations[activeIndex] as any).textShadow !== undefined ? (meditations[activeIndex] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
-          const oldFont = (meditations[prevActiveIndex.current] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif";
-          const newFont = (meditations[activeIndex] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif";
-          const oldWeight = (meditations[prevActiveIndex.current] as any).fontWeight || 'normal'; // normal by default
+          const oldFont = (meditations[prevActiveIndex.current] as any).fontFamily || DEFAULT_FONT_FAMILY;
+          const newFont = (meditations[activeIndex] as any).fontFamily || DEFAULT_FONT_FAMILY;
+          const oldWeight = (meditations[prevActiveIndex.current] as any).fontWeight || 'normal';
           const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
-          const oldSize = (meditations[prevActiveIndex.current] as any).fontSize || '15px';
-          const newSize = (meditations[activeIndex] as any).fontSize || '15px';
+          const oldSize = (meditations[prevActiveIndex.current] as any).fontSize || DEFAULT_FONT_SIZE;
+          const newSize = (meditations[activeIndex] as any).fontSize || DEFAULT_FONT_SIZE;
 
           gsap.fromTo(oldDescRef.current, 
             { opacity: 1, y: 0, color: oldColor, textShadow: oldShadow, fontFamily: oldFont, fontWeight: oldWeight, fontSize: oldSize },
@@ -183,9 +186,9 @@ export default function MobileMeditationCarousel() {
           currentDescRef.current.textContent = meditations[activeIndex].description;
           const newColor = (meditations[activeIndex] as any).textColor || '#ffffff';
           const newShadow = (meditations[activeIndex] as any).textShadow !== undefined ? (meditations[activeIndex] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
-          const newFont = (meditations[activeIndex] as any).fontFamily || "'Helvetica Rounded LT', 'Helvetica Rounded LT Std', 'Nunito', sans-serif";
+          const newFont = (meditations[activeIndex] as any).fontFamily || DEFAULT_FONT_FAMILY;
           const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
-          const newSize = (meditations[activeIndex] as any).fontSize || '15px';
+          const newSize = (meditations[activeIndex] as any).fontSize || DEFAULT_FONT_SIZE;
           gsap.set(currentDescRef.current, { opacity: 1, y: 0, color: newColor, textShadow: newShadow, fontFamily: newFont, fontWeight: newWeight, fontSize: newSize });
         }
       }
@@ -249,92 +252,97 @@ export default function MobileMeditationCarousel() {
 
   return (
     <section
-      className="relative w-full h-[100svh] min-h-[600px] overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-center pt-8 pb-12"
+      className="relative w-full h-[100svh] min-h-[600px] overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-between pt-6 pb-10"
       aria-label="Carrossel de Meditações"
       role="region"
     >
-      {/* Swipe/Drag Area delimited to the titles and top half of the image */}
-      <div 
-        className="absolute top-[15%] left-0 w-full h-[50%] z-40 touch-none"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-      />
       {/* Background ambient glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
         <div className="w-[80vw] h-[80vw] rounded-full bg-[#d4af37]/5 blur-[80px]" />
       </div>
 
-      <div className="w-full text-center mb-auto mt-4 px-4 z-20 pointer-events-none">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-widest uppercase text-[#d4af37] mb-4">
+      {/* Header Badge: Fora da área de captura de toque para não travar a rolagem da página */}
+      <div className="w-full text-center px-4 z-20 pointer-events-none shrink-0">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-widest uppercase text-[#d4af37] mb-2">
           O que você vai aprender
         </div>
       </div>
 
-      {/* Titles Area (ÁREA 1, 2, 3) */}
-      <div
-        className="relative w-full h-[140px] flex justify-center items-center z-20"
-        ref={containerRef}
-      >
-        {meditations.map((item, index) => (
-          <div
-            key={index}
-            ref={el => titlesRef.current[index] = el}
-            className="absolute w-full px-6 text-center select-none"
-            style={{
-              willChange: 'transform, opacity, filter',
-              transformOrigin: 'center center'
-            }}
-          >
-            <h3
-              className="font-display font-bold text-white max-w-[320px] mx-auto leading-[1.05]"
+      {/* Interactive Carousel Zone */}
+      <div className="w-full flex-1 flex flex-col items-center justify-center z-20 relative">
+        {/* Área de Swipe delimitada: começa abaixo do badge 'O que você vai aprender' e termina logo abaixo do texto na imagem (metade superior) */}
+        <div
+          className="absolute top-0 left-0 w-full h-[52%] z-30 touch-none select-none"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onPointerLeave={handlePointerUp}
+        />
+
+        {/* Titles Area (Área do Carrossel de Texto) */}
+        <div
+          className="relative w-full h-[120px] flex justify-center items-center overflow-hidden"
+          ref={containerRef}
+        >
+          {meditations.map((item, index) => (
+            <div
+              key={index}
+              ref={el => titlesRef.current[index] = el}
+              className="absolute w-full px-6 text-center select-none pointer-events-none"
               style={{
-                fontSize: 'clamp(22px, 6vw, 30px)',
-                textWrap: 'balance',
-                textShadow: '0 4px 20px rgba(0,0,0,0.8)'
+                willChange: 'transform, opacity, filter',
+                transformOrigin: 'center center'
               }}
             >
-              {item.title}
-            </h3>
-          </div>
-        ))}
-      </div>
+              <h3
+                className="font-display font-bold text-white max-w-[320px] mx-auto leading-[1.05]"
+                style={{
+                  fontSize: 'clamp(20px, 5.5vw, 28px)',
+                  textWrap: 'balance',
+                  textShadow: '0 4px 20px rgba(0,0,0,0.8)'
+                }}
+              >
+                {item.title}
+              </h3>
+            </div>
+          ))}
+        </div>
 
-      {/* Image Area */}
-      <div className="relative w-full flex-1 min-h-[300px] max-h-[55vh] flex justify-center items-center mt-4 z-10 pointer-events-none">
-        <div
-          ref={imageContainerRef}
-          className="relative w-[min(82vw,380px)] h-full max-h-[550px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.6)] border border-white/10"
-        >
-          {/* Old Image for Crossfade */}
-          <img
-            ref={oldImageRef}
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-          {/* Current/New Image */}
-          <img
-            ref={currentImageRef}
-            className="absolute inset-0 w-full h-full object-cover object-center"
-            alt={meditations[activeIndex].title}
-            loading={activeIndex === 0 ? "eager" : "lazy"}
-            decoding="async"
-          />
+        {/* Image Area */}
+        <div className="relative w-full flex-1 min-h-[280px] max-h-[52vh] flex justify-center items-center mt-2 pointer-events-none">
+          <div
+            ref={imageContainerRef}
+            className="relative w-[min(82vw,380px)] h-full max-h-[550px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-[0_15px_50px_rgba(0,0,0,0.6)] border border-white/10"
+          >
+            {/* Old Image for Crossfade */}
+            <img
+              ref={oldImageRef}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            {/* Current/New Image */}
+            <img
+              ref={currentImageRef}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              alt={meditations[activeIndex].title}
+              loading={activeIndex === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
 
-          {/* Dynamic Contrast Text Overlay */}
-          <div className="absolute top-0 left-0 right-0 p-5 z-20 pointer-events-none flex items-start justify-center">
-            <p ref={oldDescRef} className="absolute inset-x-5 top-5 text-white/90 leading-tight text-center opacity-0"></p>
-            <p ref={currentDescRef} className="absolute inset-x-5 top-5 text-white/90 leading-tight text-center"></p>
+            {/* Dynamic Contrast Text Overlay */}
+            <div className="absolute top-0 left-0 right-0 p-5 z-20 pointer-events-none flex items-start justify-center">
+              <p ref={oldDescRef} className="absolute inset-x-5 top-5 text-white/90 leading-tight text-center opacity-0"></p>
+              <p ref={currentDescRef} className="absolute inset-x-5 top-5 text-white/90 leading-tight text-center"></p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Progress Indicator */}
-      <div className="w-full text-center mt-6 z-20 flex justify-center items-center gap-3 pointer-events-none">
+      <div className="w-full text-center mt-4 z-20 flex justify-center items-center gap-3 pointer-events-none shrink-0">
         <span className="text-[#d4af37] font-display text-sm tracking-widest">
           {String(activeIndex + 1).padStart(2, '0')}
         </span>
