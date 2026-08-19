@@ -7,6 +7,7 @@ import FruitJourney from './components/FruitJourney';
 import FinalCTA from './components/FinalCTA';
 import KnowledgeUniverseSection from './components/KnowledgeUniverseSection';
 import MobileMeditationCarousel from './components/MobileMeditationCarousel';
+import DesktopMeditationSection from './components/DesktopMeditationSection';
 export default function App() {
 
   const fadeIn = {
@@ -25,11 +26,11 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#d4af37] selection:text-black overflow-hidden">
       {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-3 md:px-6 py-3 md:py-4">
+      <header className="fixed bottom-0 md:top-0 md:bottom-auto left-0 right-0 z-50 px-3 md:px-6 py-3 md:py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl px-3 md:px-6 py-2.5 md:py-3 gap-2">
           <div className="font-display font-bold text-[10px] sm:text-xs md:text-xl tracking-wider uppercase flex items-center gap-1.5 md:gap-2">
-            <img src="https://lh3.googleusercontent.com/d/1hZM05uCbhht62ezjEXXY1s93My3GEYva" alt="Logo" className="w-3.5 h-3.5 md:w-5 md:h-5 rounded-full object-cover shrink-0" />
-            <span className="truncate">Espaço Caminho da Luz</span>
+            <img src={new URL('./Public/icone silhueta canva reduzido icone.webp', import.meta.url).href} alt="Logo" className="w-5 h-5 md:w-7 md:h-7 rounded-full object-cover shrink-0" />
+            <span className="truncate">Jornada Interior</span>
           </div>
 
           <a
@@ -92,7 +93,7 @@ export default function App() {
               </div>
               <h2 className="font-display text-4xl md:text-5xl font-bold mb-8">Prof. Laércio Fonseca</h2>
 
-              <div className="space-y-6 text-white/70 text-lg leading-relaxed mb-10">
+              <div className="space-y-6 text-white/70 text-lg leading-relaxed mb-6 lg:mb-10">
                 <p>
                   Físico formado pela Unicamp (1980), especializado em Astrofísica e Cosmologia, o Professor Laércio Fonseca é uma das maiores autoridades brasileiras na união entre ciência e espiritualidade.
                 </p>
@@ -101,7 +102,8 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-r from-[#d4af37]/20 to-transparent border-l-4 border-[#d4af37] rounded-r-2xl p-6">
+              {/* Card no Desktop (lado direito abaixo do texto) */}
+              <div className="hidden lg:block bg-gradient-to-r from-[#d4af37]/20 to-transparent border-l-4 border-[#d4af37] rounded-r-2xl p-6">
                 <p className="text-white/80 leading-relaxed">
                   <strong className="text-[#d4af37] font-semibold">Autor reconhecido:</strong> Entre suas obras está "Física Quântica e Espiritualidade", que conecta ciência moderna com sabedoria ancestral.
                 </p>
@@ -111,14 +113,23 @@ export default function App() {
             {/* Imagem do professor */}
             <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="order-2 lg:order-1 relative w-full h-[350px] md:h-[500px] lg:h-[600px] rounded-[2rem] overflow-hidden border border-white/10 bg-[#0a0a0a]"
+              className="order-2 lg:order-1 flex flex-col gap-6"
             >
-              <img
-                src="https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/lala%20meditando%20yoga%20-%20reduzido.webp"
-                alt="Professor Laércio Fonseca"
-                className="w-full h-full object-cover object-top"
-                referrerPolicy="no-referrer"
-              />
+              <div className="relative w-full h-[350px] md:h-[500px] lg:h-[600px] rounded-[2rem] overflow-hidden border border-white/10 bg-[#0a0a0a]">
+                <img
+                  src="https://pub-9bdd8e3c98204849a491d4f564b14298.r2.dev/Curso%20Medita%C3%A7%C3%A3o/lala%20meditando%20yoga%20-%20reduzido.webp"
+                  alt="Professor Laércio Fonseca"
+                  className="w-full h-full object-cover object-top"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              {/* Card no Mobile (abaixo da foto) */}
+              <div className="block lg:hidden bg-gradient-to-r from-[#d4af37]/20 to-transparent border-l-4 border-[#d4af37] rounded-r-2xl p-6">
+                <p className="text-white/80 leading-relaxed">
+                  <strong className="text-[#d4af37] font-semibold">Autor reconhecido:</strong> Entre suas obras está "Física Quântica e Espiritualidade", que conecta ciência moderna com sabedoria ancestral.
+                </p>
+              </div>
             </motion.div>
           </div>
 
@@ -156,87 +167,7 @@ export default function App() {
       </section>
 
       {/* MODULES / ABOUT (DESKTOP) */}
-      <section id="modulos" className="hidden md:block py-16 md:py-24 px-6 bg-[#0a0a0a] border-y border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="mb-12"
-          >
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">O que você vai aprender</h2>
-            <p className="text-white/60 text-lg max-w-2xl leading-relaxed">
-              Um currículo desenhado para expandir sua percepção. Desde técnicas milenares até abordagens contemporâneas, você terá acesso a um arsenal completo de práticas meditativas.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
-            <motion.div
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  "Meditação das 12 mudras sagradas",
-                  "Meditação dos mantras sagrados",
-                  "Meditação das mandalas sagradas",
-                  "Meditação budista dos 7 chacras",
-                  "Meditação Raja Yoga",
-                  "Meditação usando cristais",
-                  "Meditação dinâmica do Osho",
-                  "Meditação e Cria Yoga",
-                  "Meditação Cromoterapia Sagrada",
-                  "Meditação New Age",
-                  "Meditação Zen Budista",
-                  "Meditação de anjos protetores",
-                  "Meditação da cura interior",
-                  "Meditação para a paz planetária",
-                  "Invocação dos seres extraterrestres",
-                  "Os alimentos corretos para pratica",
-                  "Meditação Taoista",
-                  "Tchi-Kun e a Meditação Taoísta",
-                  "Yoga e Meditação Indiana",
-                  "Meditação Bhudista Vipassana",
-                  "Meditação Braktivedanta",
-                  "Meditação Tântrica Kundalini",
-                  "Meditação Hari Krishna"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37] shrink-0"></div>
-                    <span className="font-medium text-sm text-white/80">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-              className="relative h-full min-h-[400px] rounded-[2rem] overflow-hidden border border-white/10 flex items-center justify-center bg-[#0a0a0a]"
-            >
-              <img
-                src="https://lh3.googleusercontent.com/d/15ldHHAysswb3yGz4Wu9uYA5aJdIe1-5Y"
-                alt="mulher meditando"
-                width="500"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent"></div>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
-            className="mt-16 text-center"
-          >
-            <a
-              href="https://pay.hotmart.com/N69139177Q?off=ztjix57g&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=meditacao"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border-2 border-[#d4af37] text-[#d4af37] rounded-full font-semibold text-lg hover:bg-[#d4af37] hover:text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]"
-            >
-              <span className="uppercase tracking-wider">Quero Mudar Minha Vida com a Meditação</span>
-              <Sparkles className="w-5 h-5" />
-            </a>
-          </motion.div>
-        </div>
-      </section>
+      <DesktopMeditationSection />
 
       {/* MOBILE MEDITATION CAROUSEL (MOBILE) */}
       <div className="block md:hidden border-y border-white/5">

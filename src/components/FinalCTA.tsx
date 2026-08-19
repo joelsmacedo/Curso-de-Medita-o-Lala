@@ -147,13 +147,14 @@ export default function FinalCTA() {
             {/* 5 & 6. Preço à vista e Parcelamento */}
             <div className="space-y-1 py-1">
               <div className="text-xs uppercase tracking-widest text-white/50 font-medium">
-                Investimento Único
+                Por apenas
               </div>
-              <div className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
-                R$ 598,00
+              <div className="font-display font-bold text-white tracking-tight">
+                <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white/50">12x de</span>{' '}
+                <span className="text-4xl sm:text-5xl md:text-6xl bg-gradient-to-r from-white via-[#f5d77f] to-[#d4af37] bg-clip-text text-transparent">R$ 61,85</span>
               </div>
-              <div className="text-sm sm:text-base md:text-lg font-medium text-[#d4af37]">
-                ou em 12x de R$ 61,85
+              <div className="text-sm sm:text-base md:text-lg font-medium text-white">
+                ou R$ 598,00 à vista
               </div>
             </div>
 

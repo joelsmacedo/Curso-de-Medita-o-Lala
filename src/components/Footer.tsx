@@ -11,9 +11,9 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/5 py-12 px-6 bg-[#050505]">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
-        <div className="font-display font-bold text-xl tracking-wider uppercase flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-[#d4af37]" />
-          Espaço Caminho da Luz
+        <div className="font-display font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center gap-2 opacity-40">
+          <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
+          Jornada Interior
         </div>
         <p className="text-white/40 text-sm">
           &copy; 2026 Buscai & Achareis. Todos os direitos reservados.
