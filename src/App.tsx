@@ -42,7 +42,7 @@ export default function App() {
             href="https://pay.hotmart.com/N69139177Q?off=ztjix57g&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=meditacao"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white text-black px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm font-semibold hover:bg-[#d4af37] transition-colors text-center whitespace-nowrap shrink-0"
+            className="bg-[#d4af37] text-black px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm font-bold hover:bg-white transition-all text-center whitespace-nowrap shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.3)]"
           >
             Garantir Vaga
           </a>
