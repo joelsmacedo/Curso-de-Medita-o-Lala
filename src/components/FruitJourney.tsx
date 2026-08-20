@@ -225,6 +225,7 @@ export default function FruitJourney() {
                       className="w-full h-auto object-cover"
                       style={{ objectPosition: 'center center' }}
                       loading="lazy"
+                      decoding="async"
                       referrerPolicy="no-referrer"
                     />
                   </picture>

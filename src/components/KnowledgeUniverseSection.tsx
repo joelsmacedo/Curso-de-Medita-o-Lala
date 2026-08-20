@@ -323,6 +323,7 @@ export default function KnowledgeUniverseSection() {
                             height="600"
                             className="w-full h-full object-cover rounded-md"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       </div>
@@ -390,6 +391,7 @@ export default function KnowledgeUniverseSection() {
                             height="360"
                             className="w-full h-full object-cover rounded-lg"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       </div>

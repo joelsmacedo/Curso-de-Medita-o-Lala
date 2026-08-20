@@ -81,13 +81,16 @@ export default function MobileMeditationCarousel() {
     });
   }, [activeIndex]);
 
-  // Preload all 23 meditation images in the background to avoid any download lag
+  // Preload only adjacent images to save bandwidth and improve LCP
   useEffect(() => {
-    meditations.forEach((item) => {
+    const nextIndex = (activeIndex + 1) % meditations.length;
+    const prevIndex = activeIndex === 0 ? meditations.length - 1 : activeIndex - 1;
+    
+    [nextIndex, prevIndex].forEach(idx => {
       const img = new window.Image();
-      img.src = baseUrl + item.image;
+      img.src = baseUrl + meditations[idx].image;
     });
-  }, []);
+  }, [activeIndex]);
 
   // Handle Image Animations
   useEffect(() => {

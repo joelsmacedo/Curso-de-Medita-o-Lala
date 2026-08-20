@@ -82,6 +82,8 @@ const HeroSection = () => {
               alt="Meditação"
               className="w-full h-full object-cover opacity-40"
               referrerPolicy="no-referrer"
+              fetchpriority="high"
+              loading="eager"
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-[#050505]/80 to-[#050505]"></div>

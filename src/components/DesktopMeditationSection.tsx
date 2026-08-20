@@ -6,12 +6,16 @@ import { meditations, baseUrl, DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE } from '..
 export default function DesktopMeditationSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Preload apenas imagens adjacentes para otimizar LCP
   useEffect(() => {
-    meditations.forEach((item) => {
+    const nextIndex = (activeIndex + 1) % meditations.length;
+    const prevIndex = activeIndex === 0 ? meditations.length - 1 : activeIndex - 1;
+    
+    [nextIndex, prevIndex].forEach(idx => {
       const img = new window.Image();
-      img.src = baseUrl + item.image;
+      img.src = baseUrl + meditations[idx].image;
     });
-  }, []);
+  }, [activeIndex]);
 
   const activeMeditation = meditations[activeIndex];
 
