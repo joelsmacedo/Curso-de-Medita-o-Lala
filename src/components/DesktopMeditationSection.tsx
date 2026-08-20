@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles } from 'lucide-react';
 import { meditations, baseUrl, DEFAULT_FONT_FAMILY, DEFAULT_FONT_SIZE } from '../data/meditationsData';
 
 export default function DesktopMeditationSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    meditations.forEach((item) => {
+      const img = new window.Image();
+      img.src = baseUrl + item.image;
+    });
+  }, []);
 
   const activeMeditation = meditations[activeIndex];
 
@@ -101,7 +108,7 @@ export default function DesktopMeditationSection() {
             className="lg:col-span-5 lg:sticky lg:top-24 flex flex-col items-center"
           >
             <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="popLayout">
                 <motion.div
                   key={activeIndex}
                   initial={{ opacity: 0, x: -35 }}
@@ -118,9 +125,6 @@ export default function DesktopMeditationSection() {
                     loading="eager"
                     decoding="async"
                   />
-
-                  {/* Gradiente superior suave para contraste e legibilidade do texto */}
-                  <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-black/85 via-black/55 to-transparent pointer-events-none z-10" />
 
                   {/* Overlay do Texto com estilos correspondentes ao mobile */}
                   <div className="absolute top-0 left-0 right-0 pt-10 px-6 pb-6 z-20 pointer-events-none flex items-start justify-center">

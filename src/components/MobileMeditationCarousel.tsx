@@ -81,6 +81,14 @@ export default function MobileMeditationCarousel() {
     });
   }, [activeIndex]);
 
+  // Preload all 23 meditation images in the background to avoid any download lag
+  useEffect(() => {
+    meditations.forEach((item) => {
+      const img = new window.Image();
+      img.src = baseUrl + item.image;
+    });
+  }, []);
+
   // Handle Image Animations
   useEffect(() => {
     if (prevActiveIndex.current !== activeIndex) {
@@ -91,7 +99,17 @@ export default function MobileMeditationCarousel() {
       const newImgUrl = baseUrl + meditations[activeIndex].image;
 
       if (oldImageRef.current && currentImageRef.current) {
+        // Kill previous tweens to avoid conflicting state on fast swipes
+        gsap.killTweensOf(oldImageRef.current);
+        gsap.killTweensOf(currentImageRef.current);
+        if (oldDescRef.current) gsap.killTweensOf(oldDescRef.current);
+        if (currentDescRef.current) gsap.killTweensOf(currentDescRef.current);
+
+        // Keep the old image solid underneath as fallback/base layer
         oldImageRef.current.src = oldImgUrl;
+        gsap.set(oldImageRef.current, { opacity: 1, y: 0, scale: 1 });
+
+        // Set the new image on top and prepare for smooth entrance
         currentImageRef.current.src = newImgUrl;
 
         if (oldDescRef.current && currentDescRef.current) {
@@ -107,41 +125,46 @@ export default function MobileMeditationCarousel() {
           const oldWeight = (meditations[prevActiveIndex.current] as any).fontWeight || 'normal';
           const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
           const oldSize = (meditations[prevActiveIndex.current] as any).fontSize || DEFAULT_FONT_SIZE;
+          const newSize = (meditations[activeIndex] as any).fontSize || DEFAULT_FONT_SIZE;
           const oldOffsetY = parseFloat(meditations[prevActiveIndex.current]?.offsetY || '0');
           const targetOffsetY = parseFloat(meditations[activeIndex]?.offsetY || '0');
 
+          // Transição de texto simultânea e suave, sem delay para evitar apagão do texto
           gsap.fromTo(oldDescRef.current, 
             { opacity: 1, y: oldOffsetY, color: oldColor, textShadow: oldShadow, fontFamily: oldFont, fontWeight: oldWeight, fontSize: oldSize },
-            { opacity: 0, y: (direction > 0 ? -15 : 15) + oldOffsetY, duration: 0.4, ease: "power2.inOut" }
+            { opacity: 0, y: (direction > 0 ? -12 : 12) + oldOffsetY, duration: 0.35, ease: "power2.inOut" }
           );
           
           gsap.fromTo(currentDescRef.current,
-            { opacity: 0, y: (direction > 0 ? 15 : -15) + targetOffsetY, color: newColor, textShadow: newShadow, fontFamily: newFont, fontWeight: newWeight, fontSize: newSize },
-            { opacity: 1, y: targetOffsetY, duration: 0.6, ease: "power3.out", delay: 0.15 }
+            { opacity: 0, y: (direction > 0 ? 12 : -12) + targetOffsetY, color: newColor, textShadow: newShadow, fontFamily: newFont, fontWeight: newWeight, fontSize: newSize },
+            { opacity: 1, y: targetOffsetY, duration: 0.4, ease: "power2.out" }
           );
         }
 
-        gsap.fromTo(oldImageRef.current,
-          { opacity: 1, y: 0, scale: 1 },
-          {
-            opacity: 0,
-            y: direction > 0 ? -40 : 40,
-            scale: 0.95,
-            duration: 0.5,
-            ease: "power2.inOut"
-          }
-        );
+        // Animação da imagem base (antiga) sutilmente deslizando para trás
+        gsap.to(oldImageRef.current, {
+          y: direction > 0 ? -20 : 20,
+          scale: 0.98,
+          duration: 0.45,
+          ease: "power2.out"
+        });
 
-        // Cinematic Entry for new image
+        // Imagem atual (superior) entra suavemente por cima da antiga sem deixar fundo preto visível
         gsap.fromTo(currentImageRef.current,
-          { opacity: 0, y: direction > 0 ? 50 : -50, scale: 1.05 },
+          { opacity: 0, y: direction > 0 ? 25 : -25, scale: 1.02 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.7,
-            ease: "power3.out",
-            delay: 0.1
+            duration: 0.45,
+            ease: "power2.out",
+            onComplete: () => {
+              // Sincroniza a imagem de fundo assim que a transição termina
+              if (oldImageRef.current) {
+                oldImageRef.current.src = newImgUrl;
+                gsap.set(oldImageRef.current, { opacity: 1, y: 0, scale: 1 });
+              }
+            }
           }
         );
       }
@@ -151,19 +174,24 @@ export default function MobileMeditationCarousel() {
     } else {
       updatePositions(0, false);
       // Initial image set
-      if (currentImageRef.current && currentImageRef.current.src === "") {
-        currentImageRef.current.src = baseUrl + meditations[activeIndex].image;
+      const initialImgUrl = baseUrl + meditations[activeIndex].image;
+      if (oldImageRef.current) {
+        oldImageRef.current.src = initialImgUrl;
+        gsap.set(oldImageRef.current, { opacity: 1, y: 0, scale: 1 });
+      }
+      if (currentImageRef.current) {
+        currentImageRef.current.src = initialImgUrl;
         gsap.set(currentImageRef.current, { opacity: 1, y: 0, scale: 1 });
-        if (currentDescRef.current) {
-          currentDescRef.current.textContent = meditations[activeIndex].description;
-          const newColor = (meditations[activeIndex] as any).textColor || '#ffffff';
-          const newShadow = (meditations[activeIndex] as any).textShadow !== undefined ? (meditations[activeIndex] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
-          const newFont = (meditations[activeIndex] as any).fontFamily || DEFAULT_FONT_FAMILY;
-          const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
-          const newSize = (meditations[activeIndex] as any).fontSize || DEFAULT_FONT_SIZE;
-          const initOffsetY = parseFloat(meditations[activeIndex]?.offsetY || '0');
-          gsap.set(currentDescRef.current, { opacity: 1, y: initOffsetY, color: newColor, textShadow: newShadow, fontFamily: newFont, fontWeight: newWeight, fontSize: newSize });
-        }
+      }
+      if (currentDescRef.current) {
+        currentDescRef.current.textContent = meditations[activeIndex].description;
+        const newColor = (meditations[activeIndex] as any).textColor || '#ffffff';
+        const newShadow = (meditations[activeIndex] as any).textShadow !== undefined ? (meditations[activeIndex] as any).textShadow : '0 4px 10px rgba(0,0,0,0.8)';
+        const newFont = (meditations[activeIndex] as any).fontFamily || DEFAULT_FONT_FAMILY;
+        const newWeight = (meditations[activeIndex] as any).fontWeight || 'normal';
+        const newSize = (meditations[activeIndex] as any).fontSize || DEFAULT_FONT_SIZE;
+        const initOffsetY = parseFloat(meditations[activeIndex]?.offsetY || '0');
+        gsap.set(currentDescRef.current, { opacity: 1, y: initOffsetY, color: newColor, textShadow: newShadow, fontFamily: newFont, fontWeight: newWeight, fontSize: newSize });
       }
     }
   }, [activeIndex, updatePositions]);
@@ -304,9 +332,6 @@ export default function MobileMeditationCarousel() {
               loading={activeIndex === 0 ? "eager" : "lazy"}
               decoding="async"
             />
-
-            {/* Gradiente superior suave para contraste e legibilidade do texto */}
-            <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/85 via-black/55 to-transparent pointer-events-none z-10" />
 
             {/* Dynamic Contrast Text Overlay */}
             <div className="absolute top-0 left-0 right-0 p-5 z-20 pointer-events-none flex items-start justify-center">
